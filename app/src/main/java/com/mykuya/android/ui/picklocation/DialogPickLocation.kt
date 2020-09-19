@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraIdleListener
 import com.google.android.gms.maps.MapsInitializer
@@ -21,7 +22,8 @@ import kotlinx.android.synthetic.main.dialog_pick_location.*
 import java.io.IOException
 
 
-class DialogPickLocation(context: Context, var listener: (Boolean) -> Unit = {}) : Dialog(context, R.style.FullScreenDialogLight) {
+class DialogPickLocation(context: Context, var listener: (String) -> Unit = {}) :
+    Dialog(context, R.style.FullScreenDialogLight) {
 
 
     private lateinit var map: GoogleMap
@@ -58,6 +60,20 @@ class DialogPickLocation(context: Context, var listener: (Boolean) -> Unit = {})
             dismiss()
         }
 
+        btn_confirm.setOnClickListener {
+            val address = tv_title.text.toString()
+            if (address.isNotEmpty()) {
+                listener.invoke(address)
+                dismiss()
+            } else {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.msg_error_address_null),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
         configureCameraIdle()
     }
 
@@ -69,7 +85,9 @@ class DialogPickLocation(context: Context, var listener: (Boolean) -> Unit = {})
                 val addressList: List<Address>? =
                     geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
                 if (addressList != null && addressList.isNotEmpty()) {
-                    if ( !addressList[0].getAddressLine(0).isNullOrEmpty() && !addressList[0].countryName.isNullOrEmpty()) {
+                    if (!addressList[0].getAddressLine(0)
+                            .isNullOrEmpty() && !addressList[0].countryName.isNullOrEmpty()
+                    ) {
                         val locality: String = addressList[0].getAddressLine(0)
                         val country: String = addressList[0].countryName
                         tv_title.text = "$locality  $country"

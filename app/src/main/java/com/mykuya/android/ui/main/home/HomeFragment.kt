@@ -1,8 +1,6 @@
 package com.mykuya.android.ui.main.home
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +19,7 @@ import com.mykuya.android.ui.picklocation.DialogPickLocation
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private val listFeature = mutableListOf<CategoryModel>()
     private val limitedFeatureCount = 6
 
@@ -37,10 +29,6 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -56,7 +44,10 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
     }
 
     private fun initUI() {
-        tv_hello.text = HtmlCompat.fromHtml(getString(R.string.lbl_good_afternoon), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        tv_hello.text = HtmlCompat.fromHtml(
+            getString(R.string.lbl_good_afternoon),
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
         setUpFeaturedList()
         setUpFeaturesList()
         setUpWhatNewList()
@@ -75,25 +66,20 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
         }
 
         tv_my_location.setOnClickListener {
-            DialogPickLocation(requireContext()).show()
+            DialogPickLocation(requireContext()) {
+                tv_my_location.text = it
+            }.show()
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
     override fun getPresenter(): IHomePresenter {
-        return HomePresenter<IHomeView, IHomeInteractor>(this, HomeInteractor(requireContext(),
-            requireActivity() as AppCompatActivity
-        ))
+        return HomePresenter<IHomeView, IHomeInteractor>(
+            this, HomeInteractor(
+                requireContext(),
+                requireActivity() as AppCompatActivity
+            )
+        )
     }
 
     override fun onHomeDataError() {
@@ -101,8 +87,6 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
     }
 
     override fun onHomeDataSuccess() {
-        toast("onHomeDataSuccess")
-
         listFeature.clear()
         listFeature.addAll(CategoryModel.mocks(21))
         featuresAdapter?.items = getFeatureList(limitedFeatureCount)
@@ -117,7 +101,7 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
         }
     }
 
-    private fun getFeatureList(count: Int) : MutableList<CategoryModel> {
+    private fun getFeatureList(count: Int): MutableList<CategoryModel> {
         val list = ArrayList(listFeature)
         return if (list.size > count) {
             list.subList(0, count)
@@ -149,6 +133,4 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
             toast(msg ?: getString(R.string.common_error))
         }
     }
-
-
 }

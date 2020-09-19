@@ -29,4 +29,16 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 
+    <style name="AppDesign.ButtonDefault">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:background">@drawable/button_blue</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:paddingTop">@dimen/padding_in_box_content</item>
+        <item name="android:paddingBottom">@dimen/padding_in_box_content</item>
+    </style>
+
 </resources>
