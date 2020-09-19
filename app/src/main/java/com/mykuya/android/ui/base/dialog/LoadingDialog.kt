@@ -10,7 +10,11 @@ import com.mykuya.android.R
 
 class LoadingDialog : DialogFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.view_loading, container, false)
 
         dialog?.requestWindowFeature(STYLE_NO_TITLE)

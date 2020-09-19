@@ -3,7 +3,8 @@ package com.mykuya.android.ui.base
 import androidx.recyclerview.widget.RecyclerView
 
 @Suppress("UNCHECKED_CAST")
-abstract class RecyclerAdapter<T>(val view: RecyclerView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class RecyclerAdapter<T>(val view: RecyclerView) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     open var items: MutableList<T>? = null
         set(value) {
             if (field == value) return
@@ -44,7 +45,11 @@ abstract class RecyclerAdapter<T>(val view: RecyclerView) : RecyclerView.Adapter
         return items!![p1]
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
         if (payloads.isEmpty()) super.onBindViewHolder(holder, position, payloads)
         else (holder as? RecyclerHolder<T>)?.bind(getItem(position), payloads)
     }
