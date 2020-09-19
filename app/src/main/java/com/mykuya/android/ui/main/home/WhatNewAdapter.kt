@@ -6,6 +6,7 @@ import com.mykuya.android.R
 import com.mykuya.android.model.WhatNewModel
 import com.mykuya.android.ui.base.RecyclerAdapter
 import com.mykuya.android.ui.base.RecyclerHolder
+import com.mykuya.android.utils.extension.getResourceIdFrom
 import kotlinx.android.synthetic.main.item_what_is_new.view.*
 import kotlin.math.roundToInt
 
@@ -26,7 +27,7 @@ class WhatNewAdapter(view: RecyclerView) : RecyclerAdapter<WhatNewModel>(view) {
                 val imgWidth = context.resources.displayMetrics.widthPixels
                 tv_item_title.text = item.title
                 tv_item_description.text = item.description
-                iv_item.setImageResource(R.drawable.img_what_new_1)
+                iv_item.setImageResource(context.getResourceIdFrom(item.image))
                 cv_item_what_new.layoutParams.width = ((0.7*imgWidth).roundToInt())
             }
         }

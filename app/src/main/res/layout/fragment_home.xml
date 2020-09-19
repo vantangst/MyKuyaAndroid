@@ -32,12 +32,14 @@
             app:cardCornerRadius="@dimen/common_conner_radius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_location">
+            app:layout_constraintTop_toBottomOf="@+id/ll_hello">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/activity_vertical_margin">
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingStart="@dimen/activity_vertical_margin"
+                android:paddingEnd="@dimen/activity_vertical_margin">
 
                 <TextView
                     android:id="@+id/tv_featured_label"
@@ -46,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/lbl_featured"
                     android:textStyle="bold"
+                    android:textSize="@dimen/text_size_big"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,40 +79,47 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tv_hello"
-            style="@style/AppDesign.TextViewNormalBlack"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_hello"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_big"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:padding="@dimen/padding_s"
-            android:text="@string/lbl_good_afternoon"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_my_location"
-            style="@style/AppDesign.TextViewNormalBlack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_big"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:background="@drawable/bg_transparent_white_corner"
-            android:drawablePadding="@dimen/padding_in_box_content"
-            android:paddingStart="@dimen/padding_in_box_content"
-            android:paddingTop="@dimen/padding_s"
-            android:paddingEnd="@dimen/padding_in_box_content"
-            android:paddingBottom="@dimen/padding_s"
-            android:text="Tehran"
-            app:drawableStartCompat="@drawable/ic_location_pin_12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_hello" />
+            <TextView
+                android:id="@+id/tv_hello"
+                style="@style/AppDesign.TextViewNormalBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_big"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/padding_s"
+                android:text="@string/lbl_good_afternoon" />
+
+            <TextView
+                android:id="@+id/tv_my_location"
+                style="@style/AppDesign.TextViewNormalBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_big"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:background="@drawable/bg_transparent_white_corner"
+                android:drawablePadding="@dimen/padding_in_box_content"
+                android:paddingStart="@dimen/padding_in_box_content"
+                android:paddingTop="@dimen/padding_s"
+                android:paddingEnd="@dimen/padding_in_box_content"
+                android:paddingBottom="@dimen/padding_s"
+                android:text="Tehran"
+                android:lines="1"
+                app:drawableStartCompat="@drawable/ic_location_pin_12dp" />
+
+        </LinearLayout>
 
         <!--Features-->
         <androidx.recyclerview.widget.RecyclerView
@@ -135,10 +145,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackgroundBorderless"
-            android:padding="@dimen/activity_vertical_margin"
-            android:rotation="-90"
+            android:padding="@dimen/padding_in_box_content"
+            android:rotation="0"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_baseline_arrow_black_ios_24"
+            android:src="@drawable/ic_arrow_down"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_features" />
@@ -147,6 +157,7 @@
             android:id="@+id/v_featured_bottom_line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_vertical_line"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@color/grayLight"
             app:layout_constraintTop_toBottomOf="@+id/iv_close_expanded_feature" />
 
@@ -168,6 +179,7 @@
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:text="@string/lbl_what_is_new"
+            android:textSize="@dimen/text_size_big"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v_what_new_line" />

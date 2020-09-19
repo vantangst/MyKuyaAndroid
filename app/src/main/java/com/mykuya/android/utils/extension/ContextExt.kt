@@ -46,3 +46,7 @@ fun Activity.showKeyboard(value: Boolean) {
  * Hide Keyboard from view on fragment
  */
 fun androidx.fragment.app.Fragment.showKeyboard(value: Boolean) = view!!.showKeyboard(value)
+
+fun Context.getResourceIdFrom(resourceId: String) : Int {
+    return this.resources.getIdentifier(resourceId,"drawable", packageName)
+}

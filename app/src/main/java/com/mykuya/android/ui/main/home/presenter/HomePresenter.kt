@@ -1,6 +1,7 @@
 package com.mykuya.android.ui.main.home.presenter
 
 import androidx.lifecycle.Observer
+import com.mykuya.android.R
 import com.mykuya.android.ui.main.home.interactor.IHomeInteractor
 import com.mykuya.android.ui.main.home.view.IHomeView
 import com.mykuya.android.data.HomeDataModel
@@ -15,17 +16,17 @@ constructor(view:V?,interactor:I?) : BasePresenter<V, I>(view,interactor), IHome
         interactor?.observerViewModel(Observer(this::onHomeData))
     }
 
-    fun onHomeData(result: Resource<ResultModel<HomeDataModel>>?){
+    private fun onHomeData(result: Resource<ResultModel<HomeDataModel>>?){
         if (result!=null){
             if (result.status.isSuccess()){
-                view?.onHomeDataSuccess()
+                view?.onHomeDataSuccess(result.data?.data!!)
             }else{
                 if (result.status.isError()){
-                    view?.onHomeDataError()
+                    view?.onHomeDataError(result.errorMessage!!)
                 }
             }
         }else{
-            view?.onHomeDataError()
+            view?.onHomeDataError(null)
         }
     }
 

@@ -6,6 +6,7 @@ import com.mykuya.android.R
 import com.mykuya.android.model.CategoryModel
 import com.mykuya.android.ui.base.RecyclerAdapter
 import com.mykuya.android.ui.base.RecyclerHolder
+import com.mykuya.android.utils.extension.getResourceIdFrom
 import kotlinx.android.synthetic.main.item_category.view.*
 
 class FeatureAdapter(view: RecyclerView) : RecyclerAdapter<CategoryModel>(view) {
@@ -23,7 +24,7 @@ class FeatureAdapter(view: RecyclerView) : RecyclerAdapter<CategoryModel>(view) 
             super.bind(item)
             itemView.run {
                 cv_item.text = item.name
-                cv_item.background = R.drawable.ic_cleaning
+                cv_item.background = context.getResourceIdFrom(item.image)
             }
         }
     }

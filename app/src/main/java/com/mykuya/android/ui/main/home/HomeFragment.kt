@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.mykuya.android.R
+import com.mykuya.android.data.HomeDataModel
 import com.mykuya.android.model.CategoryModel
-import com.mykuya.android.model.WhatNewModel
 import com.mykuya.android.ui.base.view.BaseFragment
 import com.mykuya.android.ui.main.home.interactor.HomeInteractor
 import com.mykuya.android.ui.main.home.interactor.IHomeInteractor
@@ -54,13 +54,13 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
         mPresenter?.getHomeData()
 
         iv_close_expanded_feature.setOnClickListener {
-            if (iv_close_expanded_feature.rotation == 90f) {
+            if (iv_close_expanded_feature.rotation == 180f) {
                 featuresAdapter?.items = getFeatureList(limitedFeatureCount)
-                iv_close_expanded_feature.rotation = -90f
+                iv_close_expanded_feature.rotation = 0f
                 featuresAdapter?.notifyDataSetChanged()
             } else {
                 featuresAdapter?.items = listFeature
-                iv_close_expanded_feature.rotation = 90f
+                iv_close_expanded_feature.rotation = 180f
                 featuresAdapter?.notifyDataSetChanged()
             }
         }
@@ -82,16 +82,16 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
         )
     }
 
-    override fun onHomeDataError() {
-        toast(R.string.common_error)
+    override fun onHomeDataError(msg: String?) {
+        toast(msg ?: getString(R.string.common_error))
     }
 
-    override fun onHomeDataSuccess() {
+    override fun onHomeDataSuccess(data: HomeDataModel) {
         listFeature.clear()
-        listFeature.addAll(CategoryModel.mocks(21))
+        listFeature.addAll(data.features)
         featuresAdapter?.items = getFeatureList(limitedFeatureCount)
-        featuredAdapter?.items = CategoryModel.mocks(3)
-        whatNewAdapter?.items = WhatNewModel.mocks(2)
+        featuredAdapter?.items = data.featured.toMutableList()
+        whatNewAdapter?.items = data.what_new.toMutableList()
     }
 
     private fun setUpFeaturesList() {
