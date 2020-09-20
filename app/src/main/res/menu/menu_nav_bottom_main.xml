@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home_menu"
+        android:icon="@drawable/menu_home_selection"
         android:title="@string/menu_bottom_home" />
 
     <item
         android:id="@+id/nav_my_jobs"
-        android:icon="@drawable/ic_my_jobs_menu"
+        android:icon="@drawable/menu_my_jobs_selection"
         android:title="@string/menu_bottom_my_job" />
 
     <item
         android:id="@+id/nav_support"
-        android:icon="@drawable/ic_mk_support_menu"
+        android:icon="@drawable/menu_support_selection"
         android:title="@string/menu_bottom_support" />
 
     <item
         android:id="@+id/nav_news"
-        android:icon="@drawable/ic_inbox_menu"
+        android:icon="@drawable/menu_inbox_selection"
         android:title="@string/menu_bottom_news" />
 
     <item
         android:id="@+id/nav_account"
-        android:icon="@drawable/ic_account_menu"
+        android:icon="@drawable/menu_account_selection"
         android:title="@string/menu_bottom_account" />
 
 </menu>
