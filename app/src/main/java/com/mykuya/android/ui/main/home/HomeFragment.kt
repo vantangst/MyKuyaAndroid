@@ -51,6 +51,7 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
         setUpFeaturedList()
         setUpFeaturesList()
         setUpWhatNewList()
+        showProgress(true)
         mPresenter?.getHomeData()
 
         iv_close_expanded_feature.setOnClickListener {
@@ -83,10 +84,12 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
     }
 
     override fun onHomeDataError(msg: String?) {
+        showProgress(false)
         toast(msg ?: getString(R.string.common_error))
     }
 
     override fun onHomeDataSuccess(data: HomeDataModel) {
+        showProgress(false)
         listFeature.clear()
         listFeature.addAll(data.features)
         featuresAdapter?.items = getFeatureList(limitedFeatureCount)
@@ -129,6 +132,7 @@ class HomeFragment : BaseFragment<IHomePresenter>(), IHomeView {
     }
 
     override fun showError(isShowing: Boolean, msg: String?) {
+        showProgress(false)
         if (isShowing) {
             toast(msg ?: getString(R.string.common_error))
         }
